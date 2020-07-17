@@ -15,17 +15,22 @@ router.post("/signup", function(req, res, next) {
   });
 });
 
+
 //find user
 router.post("/signin", function(req, res, next) {
-  User.findOne(
-    { username: req.body.username, password: req.body.password },
-    (err, user) => {
-      if (err) return res.status(400).send(err);
-      if (user == null) res.status(200).send("user_not_found");
-      const token = jwt.sign(user.id, "secretkey");
-      return res.status(200).send(token);
-    }
-  );
+  try {
+    User.findOne(
+      { username: req.body.username, password: req.body.password },
+      (err, user) => {
+        if (err) return res.status(400).send(err);
+        if (user == null) res.status(200).send("user_not_found");
+        const token = jwt.sign(user.id, "secretkey");
+        return res.status(200).json(token);
+      }
+    );
+  } catch (err) {
+    req.send(user);
+  }
 });
 
 module.exports = router;
