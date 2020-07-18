@@ -8,6 +8,7 @@ const linksSchema = new mongoose.Schema({
 const menuSchema = new mongoose.Schema({
   id: { type: String, unique: true },
   componentName: { type: String },
+  componentPath:{type:String, default: "./Components/Menu/Menu"},
   menuHeader: { type: String },
   links: [linksSchema],
 });
