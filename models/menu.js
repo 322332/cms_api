@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
+const sublinks = new mongoose.Schema({
+  linkName: String,
+  target: String,
+});
 
 const linksSchema = new mongoose.Schema({
-  link: String,
-  target: String,
+  link: sublinks,
+  sublink: [sublinks],
 });
 
 const menuSchema = new mongoose.Schema({
   id: { type: String, unique: true },
-  componentName: { type: String },
-  componentPath:{type:String, default: "./Components/Menu/Menu"},
+  componentName: { type: String, default: "menu" },
+  componentPath: { type: String, default: "./Components/Menu/Menu" },
   menuHeader: { type: String },
   links: [linksSchema],
 });

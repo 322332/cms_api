@@ -8,7 +8,7 @@ router.post("/save", async function (req, res, next) {
   const gelen = req.body;
   const char = new page(gelen);
   await page
-    .remove({ pageName: req.body.pageName })
+    .remove({ id: req.body.id })
     .then(() => {
       console.log("silindi");
     })
@@ -22,6 +22,13 @@ router.post("/save", async function (req, res, next) {
     });
 });
 
+router.post("/deletePage", async function (req, res, next) {
+  await page
+    .findOneAndDelete({ id: req.body.id })
+    .then(() => res.json("success"))
+    .catch((err) => res.json(err));
+});
+
 router.post("/getAllPages", async function (req, res, next) {
   await page
     .find({})
@@ -32,19 +39,9 @@ router.post("/getAllPages", async function (req, res, next) {
 router.post("/getPage", async function (req, res, next) {
   //console.log(req.body.adi);
   await page
-    .find({ pageName: req.body.pageName })
+    .find({ id: req.body.id })
     .then((doc) => res.json(doc))
     .catch((err) => res.json(err));
-});
-
-router.post("/getPageNames", (req, res, next) => {
-  page.find({}).then((doc) => {
-    const arr = [];
-    doc.map((item) => {
-      arr.push(item.pageName);
-    });
-    res.json(arr);
-  });
 });
 
 module.exports = router;

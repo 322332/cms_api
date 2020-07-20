@@ -43,7 +43,7 @@ app.use(cors());
 app.use("/api/getUsers", verify, getusers);
 app.use("/api/pageLayout", verify, pageLayoutRouter);
 
-app.use("/api/carousel", verify, carouselRouter);
+app.use("/api/carousel", carouselRouter);
 app.use("/api/menu", verify, menusRouter);
 app.use("/api/content", verify, contentRouter);
 
