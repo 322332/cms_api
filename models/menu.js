@@ -5,7 +5,8 @@ const sublinks = new mongoose.Schema({
 });
 
 const linksSchema = new mongoose.Schema({
-  link: sublinks,
+  linkName: String,
+  target: String,
   sublink: [sublinks],
 });
 

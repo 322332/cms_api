@@ -7,6 +7,7 @@ var link = require("../models/menu");
 router.post("/add", async function (req, res, next) {
   const gelen = req.body;
   const menu = new link(gelen);
+  console.log(gelen);
 
   await link
     .remove({ id: req.body.id })
