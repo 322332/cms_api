@@ -11,7 +11,7 @@ const itemSchema = new mongoose.Schema({
 const carouselSchema = new mongoose.Schema({
   id: { type: String, unique: true },
   componentName: { type: String, default: "carousel" },
-  componentPath: { type: String, default: "./Components/Carousel/Carousel" },
+  componentPath: { type: String, default: "./Components/MyCarousel/MyCarousel" },
   items: [itemSchema],
 });
 

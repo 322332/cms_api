@@ -27,4 +27,11 @@ router.post("/getAll", async function (req, res, next) {
     .catch((err) => res.json(err));
 });
 
+router.post("/delete", async function (req, res, next) {
+  await link
+    .findOneAndDelete({ id: req.body.id })
+    .then(() => res.json("success"))
+    .catch((err) => res.json(err));
+});
+
 module.exports = router;
