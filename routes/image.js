@@ -13,23 +13,22 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-var carousel = require("../models/carousel");
+var carousel = require("../models/image");
 
 //menu
-router.post("/add", upload.array("myFile", 5), async function (req, res, next) {
+router.post("/add", upload.array("myFile", 1), async function (req, res, next) {
   const images = [];
-
   console.log(req.body.id);
   console.log(req.files);
 
   await req.files.map((item) => {
-    console.log(item.filename);
-    images.push({ src: "/images/" + item.filename });
+    images.push("/images/"+item.filename);
   });
 
+  console.log();
   const cr = {
     id: req.body.id,
-    items: images,
+    src: images[0],
   };
 
   const car = new carousel(cr);

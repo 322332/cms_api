@@ -13,11 +13,16 @@ var usersRouter = require("./routes/users");
 var componentsRouter = require("./routes/components");
 var pageLayoutRouter = require("./routes/pageLayout");
 
+var imageRouter = require("./routes/image");
 var menusRouter = require("./routes/menus");
 var carouselRouter = require("./routes/carousel");
 var contentRouter = require("./routes/contents");
 
+var dashboardRouter = require("./routes/dashboard");
+
+
 var app = express();
+
 
 //MongoDB connection
 const mongoose = require("mongoose");
@@ -43,11 +48,15 @@ app.use(cors());
 app.use("/api/getUsers", verify, getusers);
 app.use("/api/pageLayout", verify, pageLayoutRouter);
 
+app.use("/api/image", imageRouter);
 app.use("/api/carousel", carouselRouter);
 app.use("/api/menu", verify, menusRouter);
 app.use("/api/content", verify, contentRouter);
 
 app.use("/api/components", verify, componentsRouter);
+
+app.use("/api/dashboard", verify, dashboardRouter);
+
 
 //register login
 app.use("/users", usersRouter);

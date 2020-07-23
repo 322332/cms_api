@@ -8,12 +8,17 @@ const image = require("../models/image");
 
 /* toplu component object dönecek*/
 router.post("/", async function (req, res, next) {
-  const menuDoc = await menu.find({}, "-_id -__v");
-  const contentDoc = await content.find({}, "-_id -__v");
-  const carouselDoc = await carousel.find({}, "-_id -__v");
-  const imageDoc = await image.find({}, "-_id -__v");
+  const menuDoc = await menu.countDocuments({});
+  const contentDoc = await content.countDocuments({});
+  const carouselDoc = await carousel.countDocuments({});
+  const imageDoc = await image.countDocuments({});
 
-  const arr = [...menuDoc, ...contentDoc, ...carouselDoc, ...imageDoc];
+  const arr = {
+    menuSize: menuDoc,
+    contentSize: contentDoc,
+    carouselSize: carouselDoc,
+    imageSize: imageDoc,
+  };
 
   res.json(arr);
 });
